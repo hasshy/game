@@ -1,0 +1,59 @@
+//おまじない
+enchant();
+
+
+/* 定数(後でファイル分割)  */
+var STRING_SLASH = "/"
+
+var SCREEN_WIDTH = 960;
+var SCREEN_HEIGHT = 640;
+var CHARA_IMAGE = "http://enchantjs.com/assets/images/chara1.gif"
+
+
+//メイン処理
+window.onload = function(){
+	
+	//Gameクラスを取得、引数に値を渡すと画面サイズ変更可
+	var game = new Game(SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	//画像の読み込み
+	game.preload(CHARA_IMAGE);
+	game.preload(CHARA02C_PATH);
+
+	//ゲーム開始時の処理
+	game.onload = function(){
+
+		// 背景
+		var scene = game.rootScene;
+		scene.backgroundColor = "blue";
+
+		
+		// グループ生成
+		var group = new Group();
+		group.moveTo((SCREEN_WIDTH-96)/2, (SCREEN_HEIGHT-64)/2);
+
+		for(var i=0; i<16; ++i){
+			//スプライトを生成、追加
+			var sprite = new Sprite(32, 32);
+
+
+		// キャラクタセット
+		var sprite = new Sprite(32, 32);
+		sprite.image = game.assets[CHARA_IMAGE]
+		scene.addChild(sprite);
+
+		
+
+		// 画像をセット
+		sprite.onenterframe = function() {
+			this.moveBy(1,1);
+		}
+		
+		//シーンに追加
+		game.rootScene.addChild(sprite);
+
+	};
+
+	game.start();
+
+};
